@@ -2,8 +2,6 @@ package skrijeljhasib.chat.Client;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import skrijeljhasib.chat.Entity.Entity;
 import skrijeljhasib.chat.Entity.Message;
 import skrijeljhasib.chat.Helper.JsonObjectConverter;
 

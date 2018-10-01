@@ -21,5 +21,3 @@ public class RoomFragment extends Fragment
         return inflater.inflate(R.layout.fragment_room, container, false);
     }
 }
-
-
