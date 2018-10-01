@@ -16,7 +16,7 @@ public class RoomClient extends ApiClient
 
     public String createRoom(Room room)
     {
-        Map<String, Entity> parameters = new HashMap<>();
+        Map<String, Object> parameters = new HashMap<>();
         parameters.put("room", room);
 
         return this.post(JsonObjectConverter.objectToJson(parameters));

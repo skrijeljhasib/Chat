@@ -2,11 +2,10 @@ package skrijeljhasib.chat.Helper;
 
 import com.google.gson.Gson;
 import java.util.Map;
-import skrijeljhasib.chat.Entity.Entity;
 
 public class JsonObjectConverter
 {
-    public static String objectToJson(Map<String, Entity> object)
+    public static String objectToJson(Map<String, Object> object)
     {
         Gson gson = new Gson();
 

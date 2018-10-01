@@ -16,7 +16,7 @@ public class MessageClient extends ApiClient
 
     public String addMessageToRoom(Message message)
     {
-        Map<String, Entity> parameters = new HashMap<>();
+        Map<String, Object> parameters = new HashMap<>();
         parameters.put("message", message);
 
         return this.post(JsonObjectConverter.objectToJson(parameters));
