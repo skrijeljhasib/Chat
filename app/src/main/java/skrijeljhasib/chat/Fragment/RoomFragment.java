@@ -10,11 +10,6 @@ import skrijeljhasib.chat.R;
 
 public class RoomFragment extends Fragment
 {
-    public RoomFragment()
-    {
-        super();
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

@@ -6,12 +6,11 @@ import io.socket.client.IO;
 import io.socket.client.Socket;
 import skrijeljhasib.chat.Constants.Constants;
 
-public class ChatApplication extends Application
-{
+public class ChatApplication extends Application {
+
     private Socket socket;
 
-    public ChatApplication()
-    {
+    public ChatApplication() {
         try {
             this.socket = IO.socket(Constants.CHAT_SERVER_URL);
         } catch (URISyntaxException e) {
@@ -19,13 +18,11 @@ public class ChatApplication extends Application
         }
     }
 
-    public Socket getSocket()
-    {
+    public Socket getSocket() {
         return socket;
     }
 
-    public void setSocket(Socket socket)
-    {
+    public void setSocket(Socket socket) {
         this.socket = socket;
     }
 }

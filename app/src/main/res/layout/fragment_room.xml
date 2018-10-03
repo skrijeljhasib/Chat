@@ -2,49 +2,49 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+    android:id="@+id/fragment_room"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Fragment.RoomFragment">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/RoomHistory"
+        android:id="@+id/room_messages"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_height="0dp"
+        android:layout_weight="9"
         android:scrollbars="horizontal">
 
     </android.support.v7.widget.RecyclerView>
 
     <LinearLayout
-        android:id="@+id/InputAndSendButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:orientation="horizontal">
+            android:id="@+id/room_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            tools:layout_editor_absoluteY="567dp">
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/InputMessageText"
-            android:layout_width="match_parent"
+            android:id="@+id/text_layout"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="4">
 
             <android.support.design.widget.TextInputEditText
+                android:id="@+id/message_input"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Message #room"
-                android:selectAllOnFocus="false"
-                android:singleLine="false" />
-
+                android:hint="Message ..." />
         </android.support.design.widget.TextInputLayout>
 
         <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="match_parent"
+            android:id="@+id/send_message_button"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="3"
+            android:layout_weight="1"
+            android:contentDescription="Send message to room"
             android:src="@android:drawable/ic_menu_send" />
-
     </LinearLayout>
 
 </LinearLayout>
