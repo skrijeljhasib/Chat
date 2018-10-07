@@ -11,20 +11,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 import skrijeljhasib.chat.ChatApplication;
 import skrijeljhasib.chat.Entity.Message;
 import skrijeljhasib.chat.Entity.Room;
+import skrijeljhasib.chat.Fragment.Adapter.MessageAdapter;
 import skrijeljhasib.chat.Helper.JsonObjectConverter;
 import skrijeljhasib.chat.R;
 
-public class RoomFragment extends Fragment
-{
+public class RoomFragment extends Fragment {
     private Room room;
     private RecyclerView roomMessagesView;
     private ImageButton sendMessageButton;
@@ -75,7 +78,6 @@ public class RoomFragment extends Fragment
     @Override
     public void onDestroy() {
         super.onDestroy();
-
         socket.disconnect();
     }
 
@@ -126,17 +128,16 @@ public class RoomFragment extends Fragment
         }
     };
 
-    public View.OnClickListener buttonListener = new  View.OnClickListener() {
+    public View.OnClickListener buttonListener = new View.OnClickListener() {
         @Override
-            public void onClick(View v)
-            {
-                Message message = new Message();
-                message.setBody(messageText.getText().toString());
+        public void onClick(View v) {
+            Message message = new Message();
+            message.setBody(messageText.getText().toString());
 
-                // Send to Chat-api here
+            // Send to Chat-api here
 
-                System.out.println(messageText.getText().toString());
-            }
+            System.out.println(messageText.getText().toString());
+        }
     };
 
     private void scrollToBottom() {

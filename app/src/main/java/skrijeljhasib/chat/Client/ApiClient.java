@@ -11,12 +11,10 @@ import java.util.Map;
 
 import skrijeljhasib.chat.Helper.ParameterStringBuilder;
 
-abstract class ApiClient
-{
+abstract class ApiClient {
     private HttpURLConnection con;
 
-    ApiClient(String url, String authorization)
-    {
+    ApiClient(String url, String authorization) {
         try {
             this.con = (HttpURLConnection) new URL(url).openConnection();
             this.con.setRequestProperty("Content-Type", "application/json");
@@ -28,13 +26,12 @@ abstract class ApiClient
         }
     }
 
-    String post(String json)
-    {
+    String post(String json) {
         StringBuilder response = new StringBuilder();
 
         try {
             this.con.setRequestMethod("POST");
-            DataOutputStream wr = new DataOutputStream (this.con.getOutputStream());
+            DataOutputStream wr = new DataOutputStream(this.con.getOutputStream());
             wr.writeBytes(json);
             wr.close();
 
@@ -55,8 +52,7 @@ abstract class ApiClient
         return response.toString();
     }
 
-    String get(Map<String, String> parameters)
-    {
+    String get(Map<String, String> parameters) {
         StringBuilder response = new StringBuilder();
 
         try {

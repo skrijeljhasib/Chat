@@ -1,3 +1,4 @@
 package skrijeljhasib.chat.Entity;
 
-public interface Entity {}
+public interface Entity {
+}

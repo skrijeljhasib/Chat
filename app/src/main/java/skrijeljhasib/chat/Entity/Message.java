@@ -3,8 +3,7 @@ package skrijeljhasib.chat.Entity;
 import java.util.Collection;
 import java.util.Date;
 
-public class Message implements Entity
-{
+public class Message implements Entity {
     private int id;
 
     private String body;
@@ -19,73 +18,59 @@ public class Message implements Entity
 
     private Collection contexts;
 
-    public int getId()
-    {
+    public int getId() {
         return id;
     }
 
-    public void setId(int id)
-    {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getBody()
-    {
+    public String getBody() {
         return body;
     }
 
-    public void setBody(String body)
-    {
+    public void setBody(String body) {
         this.body = body;
     }
 
-    public Date getCreatedAt()
-    {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt)
-    {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 
-    public String getUsername()
-    {
+    public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username)
-    {
+    public void setUsername(String username) {
         this.username = username;
     }
 
-    public String getDisplayUsername()
-    {
+    public String getDisplayUsername() {
         return displayUsername;
     }
 
-    public void setDisplayUsername(String displayUsername)
-    {
+    public void setDisplayUsername(String displayUsername) {
         this.displayUsername = displayUsername;
     }
 
-    public Room getRoom()
-    {
+    public Room getRoom() {
         return room;
     }
 
-    public void setRoom(Room room)
-    {
+    public void setRoom(Room room) {
         this.room = room;
     }
 
-    public Collection getContexts()
-    {
+    public Collection getContexts() {
         return contexts;
     }
 
-    public void setContexts(Collection contexts)
-    {
+    public void setContexts(Collection contexts) {
         this.contexts = contexts;
     }
 }

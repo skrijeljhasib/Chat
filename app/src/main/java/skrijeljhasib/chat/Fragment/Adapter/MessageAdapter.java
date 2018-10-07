@@ -1,4 +1,4 @@
-package skrijeljhasib.chat.Fragment;
+package skrijeljhasib.chat.Fragment.Adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -6,7 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import java.util.List;
+
 import skrijeljhasib.chat.Entity.Message;
 import skrijeljhasib.chat.R;
 

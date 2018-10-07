@@ -1,7 +1,9 @@
 package skrijeljhasib.chat;
 
 import android.app.Application;
+
 import java.net.URISyntaxException;
+
 import io.socket.client.IO;
 import io.socket.client.Socket;
 import io.socket.engineio.client.transports.WebSocket;
@@ -18,7 +20,7 @@ public class ChatApplication extends Application {
             socket = IO.socket(Constants.CHAT_SERVER_URL, opts);
 
         } catch (URISyntaxException e) {
-           throw new RuntimeException(e);
+            throw new RuntimeException(e);
         }
     }
 
