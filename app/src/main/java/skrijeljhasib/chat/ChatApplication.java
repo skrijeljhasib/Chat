@@ -17,7 +17,7 @@ public class ChatApplication extends Application {
         try {
             IO.Options opts = new IO.Options();
             opts.transports = new String[]{WebSocket.NAME};
-            socket = IO.socket(Constants.CHAT_SERVER_URL, opts);
+            socket = IO.socket(Constants.CHAT_SERVER_SOCKET_URL, opts);
 
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);

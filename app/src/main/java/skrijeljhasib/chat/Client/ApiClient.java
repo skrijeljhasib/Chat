@@ -16,40 +16,35 @@ abstract class ApiClient {
 
     ApiClient(String url, String authorization) {
         try {
-            this.con = (HttpURLConnection) new URL(url).openConnection();
-            this.con.setRequestProperty("Content-Type", "application/json");
-            this.con.setRequestProperty("Authorization", authorization);
-            this.con.setConnectTimeout(3000);
-            this.con.setReadTimeout(3000);
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            con = (HttpURLConnection) new URL(url).openConnection();
+            con.setRequestProperty("Content-Type", "application/json");
+            con.setRequestProperty("Authorization", authorization);
+            con.setConnectTimeout(3000);
+            con.setReadTimeout(3000);
+            con.setDoOutput(true);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
-    String post(String json) {
-        StringBuilder response = new StringBuilder();
+    void post(final String json) {
+        Thread thread = new Thread(new Runnable() {
 
-        try {
-            this.con.setRequestMethod("POST");
-            DataOutputStream wr = new DataOutputStream(this.con.getOutputStream());
-            wr.writeBytes(json);
-            wr.close();
-
-            InputStream is = this.con.getInputStream();
-            BufferedReader rd = new BufferedReader(new InputStreamReader(is));
-            String line;
-            while ((line = rd.readLine()) != null) {
-                response.append(line);
-                response.append('\r');
+            @Override
+            public void run() {
+                try {
+                    con.setRequestMethod("POST");
+                    con.connect();
+                    DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+                    wr.writeBytes(json);
+                    wr.flush();
+                    wr.close();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
             }
-            rd.close();
-        } catch (Exception e) {
-            this.con.disconnect();
-            e.printStackTrace();
-        }
-        this.con.disconnect();
-
-        return response.toString();
+        });
+        thread.start();
     }
 
     String get(Map<String, String> parameters) {

@@ -11,11 +11,11 @@ public class RoomClient extends ApiClient {
         super(url + "/api/rooms", authorization);
     }
 
-    public String createRoom(Room room) {
+    public void createRoom(Room room) {
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("room", room);
 
-        return this.post(JsonObjectConverter.objectToJson(parameters));
+        post(JsonObjectConverter.objectToJson(parameters));
     }
 
     public String fetchRoom(String id) {

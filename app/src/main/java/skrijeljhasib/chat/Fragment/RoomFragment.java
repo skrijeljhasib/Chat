@@ -21,6 +21,8 @@ import java.util.List;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 import skrijeljhasib.chat.ChatApplication;
+import skrijeljhasib.chat.Client.MessageClient;
+import skrijeljhasib.chat.Constants.Constants;
 import skrijeljhasib.chat.Entity.Message;
 import skrijeljhasib.chat.Entity.Room;
 import skrijeljhasib.chat.Fragment.Adapter.MessageAdapter;
@@ -37,12 +39,14 @@ public class RoomFragment extends Fragment {
     private RecyclerView.Adapter roomMessagesViewAdapter;
     private List<Message> messages = new ArrayList<>();
     private String username;
+    private MessageClient messageClient;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         roomMessagesViewAdapter = new MessageAdapter(context, messages);
         username = "Hasib";
+        messageClient = new MessageClient(Constants.CHAT_SERVER_API_URL, "");
     }
 
     @Nullable
@@ -131,12 +135,20 @@ public class RoomFragment extends Fragment {
     public View.OnClickListener buttonListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Message message = new Message();
-            message.setBody(messageText.getText().toString());
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
 
-            // Send to Chat-api here
-
-            System.out.println(messageText.getText().toString());
+                    if (!messageText.getText().toString().isEmpty()) {
+                        Message message = new Message();
+                        message.setUsername(username);
+                        message.setBody(messageText.getText().toString());
+                        message.setRoom(room);
+                        messageClient.addMessageToRoom(message);
+                        messageText.setText("");
+                    }
+                }
+            });
         }
     };
 

@@ -11,10 +11,10 @@ public class MessageClient extends ApiClient {
         super(url + "/api/messages", authorization);
     }
 
-    public String addMessageToRoom(Message message) {
+    public void addMessageToRoom(Message message) {
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("message", message);
 
-        return this.post(JsonObjectConverter.objectToJson(parameters));
+        post(JsonObjectConverter.objectToJson(parameters));
     }
 }
