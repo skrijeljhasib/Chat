@@ -19,5 +19,6 @@ public class ConnectActivity extends AppCompatActivity {
     public void connect(View view) {
         Intent intent = new Intent(ConnectActivity.this, MainActivity.class);
         startActivity(intent);
+        finish();
     }
 }

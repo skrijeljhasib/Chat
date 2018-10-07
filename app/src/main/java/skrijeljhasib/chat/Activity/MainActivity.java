@@ -65,8 +65,9 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.disconnect:
                 ChatApplication chatApplication = (ChatApplication) getApplication();
-                startActivity(new Intent(MainActivity.this, ConnectActivity.class));
                 chatApplication.getSocket().disconnect();
+                startActivity(new Intent(MainActivity.this, ConnectActivity.class));
+                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);
