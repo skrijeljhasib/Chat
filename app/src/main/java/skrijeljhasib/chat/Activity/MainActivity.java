@@ -1,5 +1,6 @@
 package skrijeljhasib.chat.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import skrijeljhasib.chat.ChatApplication;
 import skrijeljhasib.chat.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -57,6 +59,14 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+            case R.id.about:
+                startActivity(new Intent(MainActivity.this, AboutActivity.class));
+                return true;
+            case R.id.disconnect:
+                ChatApplication chatApplication = (ChatApplication) getApplication();
+                startActivity(new Intent(MainActivity.this, ConnectActivity.class));
+                chatApplication.getSocket().disconnect();
                 return true;
         }
         return super.onOptionsItemSelected(item);
