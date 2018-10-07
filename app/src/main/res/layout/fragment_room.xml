@@ -12,18 +12,19 @@
         android:id="@+id/room_messages"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="9"
-        android:scrollbars="horizontal">
+        android:layout_weight="1"
+        android:scrollbars="horizontal"
+        android:layout_marginTop="?attr/actionBarSize" >
 
     </android.support.v7.widget.RecyclerView>
 
     <LinearLayout
-            android:id="@+id/room_bottom"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            tools:layout_editor_absoluteY="567dp">
+        android:id="@+id/room_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:orientation="horizontal">
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/text_layout"
@@ -42,7 +43,6 @@
             android:id="@+id/send_message_button"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:contentDescription="Send message to room"
             android:src="@android:drawable/ic_menu_send" />
     </LinearLayout>

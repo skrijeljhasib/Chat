@@ -12,10 +12,10 @@ public class JsonObjectConverter
         return gson.toJson(object);
     }
 
-    public static Object jsonToObject(Class object, String json)
+    public static Object jsonToObject(String json, Class className)
     {
         Gson gson = new Gson();
 
-        return gson.fromJson(json, object);
+        return gson.fromJson(json, className);
     }
 }

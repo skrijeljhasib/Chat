@@ -4,6 +4,7 @@ import android.app.Application;
 import java.net.URISyntaxException;
 import io.socket.client.IO;
 import io.socket.client.Socket;
+import io.socket.engineio.client.transports.WebSocket;
 import skrijeljhasib.chat.Constants.Constants;
 
 public class ChatApplication extends Application {
@@ -12,7 +13,10 @@ public class ChatApplication extends Application {
 
     public ChatApplication() {
         try {
-            this.socket = IO.socket(Constants.CHAT_SERVER_URL);
+            IO.Options opts = new IO.Options();
+            opts.transports = new String[]{WebSocket.NAME};
+            socket = IO.socket(Constants.CHAT_SERVER_URL, opts);
+
         } catch (URISyntaxException e) {
            throw new RuntimeException(e);
         }
