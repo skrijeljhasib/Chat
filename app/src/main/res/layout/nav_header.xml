@@ -9,9 +9,13 @@
     android:gravity="bottom">
 
     <TextView
+        android:clickable="true"
+        android:id="@+id/room_list_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Rooms"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:focusable="false"
+        android:focusableInTouchMode="false" />
 
 </LinearLayout>

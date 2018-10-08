@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import skrijeljhasib.chat.ChatApplication;
+import skrijeljhasib.chat.Fragment.MainFragment;
 import skrijeljhasib.chat.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -45,6 +46,12 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     }
                 });
+
+        MainFragment mainFragment = new MainFragment();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.content_frame_main, mainFragment)
+                .addToBackStack(null)
+                .commit();
     }
 
     @Override
@@ -71,5 +78,10 @@ public class MainActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        finishAffinity();
     }
 }

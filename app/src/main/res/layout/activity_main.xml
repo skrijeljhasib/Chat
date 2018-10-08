@@ -10,7 +10,7 @@
     tools:context=".Activity.MainActivity" >
 
     <FrameLayout
-        android:id="@+id/content_frame"
+        android:id="@+id/content_frame_top"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -28,21 +28,12 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:fitsSystemWindows="true"
         app:menu="@menu/left_sidebar"
         app:headerLayout="@layout/nav_header" />
 
     <FrameLayout
-        android:id="@+id/content"
+        android:id="@+id/content_frame_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <fragment
-            android:id="@+id/room"
-            android:name="skrijeljhasib.chat.Fragment.RoomFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </FrameLayout>
+        android:layout_height="match_parent" />
 
 </android.support.v4.widget.DrawerLayout>
