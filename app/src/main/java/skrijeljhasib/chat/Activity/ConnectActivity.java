@@ -33,10 +33,8 @@ public class ConnectActivity extends AppCompatActivity {
         String token = tokenInput.getText().toString();
 
         if (serverAddress.isEmpty()) {
-            serverInput.setHint("Please enter server address");
             serverInput.setError("Please enter server address");
         } else if (username.isEmpty()) {
-            usernameInput.setHint("Please enter username");
             usernameInput.setError("Please enter username");
         } else {
 
@@ -54,7 +52,6 @@ public class ConnectActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             } catch (Throwable e) {
-                serverInput.setHint("Please enter a valid server address");
                 serverInput.setError("Please enter a valid server address");
             }
         }
