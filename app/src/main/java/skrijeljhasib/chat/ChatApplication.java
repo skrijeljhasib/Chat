@@ -2,27 +2,16 @@ package skrijeljhasib.chat;
 
 import android.app.Application;
 
-import java.net.URISyntaxException;
-
-import io.socket.client.IO;
 import io.socket.client.Socket;
-import io.socket.engineio.client.transports.WebSocket;
-import skrijeljhasib.chat.Constants.Constants;
+import skrijeljhasib.chat.Client.MessageClient;
+import skrijeljhasib.chat.Client.RoomClient;
 
 public class ChatApplication extends Application {
 
     private Socket socket;
-
-    public ChatApplication() {
-        try {
-            IO.Options opts = new IO.Options();
-            opts.transports = new String[]{WebSocket.NAME};
-            socket = IO.socket(Constants.CHAT_SERVER_SOCKET_URL, opts);
-
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
-    }
+    private MessageClient messageClient;
+    private RoomClient roomClient;
+    private String username;
 
     public Socket getSocket() {
         return socket;
@@ -30,5 +19,29 @@ public class ChatApplication extends Application {
 
     public void setSocket(Socket socket) {
         this.socket = socket;
+    }
+
+    public MessageClient getMessageClient() {
+        return messageClient;
+    }
+
+    public void setMessageClient(MessageClient messageClient) {
+        this.messageClient = messageClient;
+    }
+
+    public RoomClient getRoomClient() {
+        return roomClient;
+    }
+
+    public void setRoomClient(RoomClient roomClient) {
+        this.roomClient = roomClient;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
