@@ -53,12 +53,11 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        System.out.println(item.getItemId());
-
         RoomFragment roomFragment = new RoomFragment();
         //roomFragment.setArguments();
         getActivity().getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_frame_main, roomFragment)
+                .addToBackStack(null)
                 .commit();
 
         //item.setChecked(true);
