@@ -45,7 +45,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:contentDescription="Send message to room"
-            android:src="@android:drawable/ic_menu_send" />
+            android:background="@null"
+            android:src="@drawable/ic_send_black_24dp" />
     </LinearLayout>
 
 </LinearLayout>
