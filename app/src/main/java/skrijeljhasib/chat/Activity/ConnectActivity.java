@@ -33,9 +33,9 @@ public class ConnectActivity extends AppCompatActivity {
         String token = tokenInput.getText().toString();
 
         if (serverAddress.isEmpty()) {
-            serverInput.setError("Please enter server address");
+            serverInput.setError("Please enter a server address");
         } else if (username.isEmpty()) {
-            usernameInput.setError("Please enter username");
+            usernameInput.setError("Please enter an username");
         } else {
 
             ChatApplication chatApplication = (ChatApplication) getApplication();

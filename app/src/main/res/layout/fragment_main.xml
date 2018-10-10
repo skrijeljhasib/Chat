@@ -6,4 +6,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Fragment.MainFragment" >
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="No room selected"
+        android:textSize="24sp" />
 </LinearLayout>
