@@ -25,14 +25,13 @@ abstract class ApiClient {
     String post(String json) {
         try {
             con.setRequestMethod("POST");
-            con.connect();
 
             DataOutputStream wr = new DataOutputStream(con.getOutputStream());
             wr.writeBytes(json);
             wr.flush();
             wr.close();
 
-            HttpRequest post = new HttpRequest(con.getInputStream());
+            HttpRequest post = new HttpRequest(con);
             Thread thread = new Thread(post);
             thread.start();
             thread.join();
@@ -48,7 +47,6 @@ abstract class ApiClient {
     String get(Map<String, String> parameters) {
         try {
             con.setRequestMethod("GET");
-            con.connect();
 
             /*String parameterString = ParameterStringBuilder.getParamsString(parameters);
             DataOutputStream out = new DataOutputStream(con.getOutputStream());
@@ -56,7 +54,7 @@ abstract class ApiClient {
             out.flush();
             out.close();*/
 
-            HttpRequest get = new HttpRequest(con.getInputStream());
+            HttpRequest get = new HttpRequest(con);
             Thread thread = new Thread(get);
             thread.start();
             thread.join();

@@ -1,16 +1,16 @@
 package skrijeljhasib.chat.Client.Runnable;
 
 import java.io.BufferedReader;
-import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 
 public class HttpRequest implements Runnable {
 
-    private volatile InputStream inputStream;
+    private volatile HttpURLConnection httpURLConnection;
     private volatile StringBuilder responseBody = new StringBuilder();
 
-    public HttpRequest(InputStream i) {
-        inputStream = i;
+    public HttpRequest(HttpURLConnection h) {
+        httpURLConnection = h;
     }
 
     public String getResponseBody() {
@@ -20,7 +20,9 @@ public class HttpRequest implements Runnable {
     @Override
     public void run() {
         try {
-            BufferedReader in = new BufferedReader(new InputStreamReader(inputStream));
+            httpURLConnection.connect();
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
 
             String inputLine;
             while ((inputLine = in.readLine()) != null) {

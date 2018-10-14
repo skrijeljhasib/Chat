@@ -14,7 +14,7 @@ public class Room implements Entity {
 
     private String name;
 
-    private Collection messages;
+    private Message[] messages;
 
     private Collection contexts;
 
@@ -60,11 +60,11 @@ public class Room implements Entity {
         this.name = name;
     }
 
-    public Collection getMessages() {
+    public Message[] getMessages() {
         return messages;
     }
 
-    public void setMessages(Collection messages) {
+    public void setMessages(Message[] messages) {
         this.messages = messages;
     }
 
