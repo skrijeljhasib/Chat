@@ -24,16 +24,20 @@ public class ConnectActivity extends AppCompatActivity {
 
     public void connect(View view) {
 
-        TextInputEditText serverInput = findViewById(R.id.network_settings_server);
+        TextInputEditText socketInput = findViewById(R.id.network_settings_socket);
+        TextInputEditText apiInput = findViewById(R.id.network_settings_api);
         TextInputEditText tokenInput = findViewById(R.id.network_settings_token);
         TextInputEditText usernameInput = findViewById(R.id.user_preferences_username);
 
-        String serverAddress = serverInput.getText().toString();
+        String socketAddress = socketInput.getText().toString();
+        String apiAddress = apiInput.getText().toString();
         String username = usernameInput.getText().toString();
         String token = tokenInput.getText().toString();
 
-        if (serverAddress.isEmpty()) {
-            serverInput.setError("Please enter a server address");
+        if (socketAddress.isEmpty()) {
+            socketInput.setError("Please enter a socket address");
+        } else if (apiAddress.isEmpty()) {
+            apiInput.setError("Please enter a API address");
         } else if (username.isEmpty()) {
             usernameInput.setError("Please enter an username");
         } else {
@@ -44,15 +48,15 @@ public class ConnectActivity extends AppCompatActivity {
             opts.transports = new String[]{WebSocket.NAME};
 
             try {
-                chatApplication.setSocket(IO.socket(serverAddress, opts));
-                chatApplication.setMessageClient(new MessageClient(serverAddress, token));
-                chatApplication.setRoomClient(new RoomClient(serverAddress, token));
+                chatApplication.setSocket(IO.socket(socketAddress, opts));
+                chatApplication.setMessageClient(new MessageClient(apiAddress, token));
+                chatApplication.setRoomClient(new RoomClient(apiAddress, token));
 
                 Intent intent = new Intent(ConnectActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             } catch (Throwable e) {
-                serverInput.setError("Please enter a valid server address");
+                socketInput.setError("Check you addresses");
             }
         }
     }

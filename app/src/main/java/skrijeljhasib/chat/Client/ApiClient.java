@@ -1,15 +1,11 @@
 package skrijeljhasib.chat.Client;
 
-import java.io.BufferedReader;
 import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Map;
 
-import skrijeljhasib.chat.Helper.ParameterStringBuilder;
+import skrijeljhasib.chat.Client.Runnable.HttpRequest;
 
 abstract class ApiClient {
     private HttpURLConnection con;
@@ -21,57 +17,54 @@ abstract class ApiClient {
             con.setRequestProperty("Authorization", authorization);
             con.setConnectTimeout(3000);
             con.setReadTimeout(3000);
-            con.setDoOutput(true);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
         }
     }
 
-    void post(final String json) {
-        Thread thread = new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                try {
-                    con.setRequestMethod("POST");
-                    con.connect();
-                    DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-                    wr.writeBytes(json);
-                    wr.flush();
-                    wr.close();
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                }
-            }
-        });
-        thread.start();
-    }
-
-    String get(Map<String, String> parameters) {
-        StringBuilder response = new StringBuilder();
-
+    String post(String json) {
         try {
-            this.con.setRequestMethod("GET");
-            this.con.setDoOutput(true);
+            con.setRequestMethod("POST");
+            con.connect();
 
-            DataOutputStream out = new DataOutputStream(con.getOutputStream());
-            out.writeBytes(ParameterStringBuilder.getParamsString(parameters));
-            out.flush();
-            out.close();
+            DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+            wr.writeBytes(json);
+            wr.flush();
+            wr.close();
 
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()));
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
-            in.close();
-
-        } catch (IOException e) {
-            this.con.disconnect();
+            HttpRequest post = new HttpRequest(con.getInputStream());
+            Thread thread = new Thread(post);
+            thread.start();
+            thread.join();
+            return post.getResponseBody();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return response.toString();
+        return "";
+
+    }
+
+    String get(Map<String, String> parameters) {
+        try {
+            con.setRequestMethod("GET");
+            con.connect();
+
+            /*String parameterString = ParameterStringBuilder.getParamsString(parameters);
+            DataOutputStream out = new DataOutputStream(con.getOutputStream());
+            out.writeBytes(parameterString);
+            out.flush();
+            out.close();*/
+
+            HttpRequest get = new HttpRequest(con.getInputStream());
+            Thread thread = new Thread(get);
+            thread.start();
+            thread.join();
+            return get.getResponseBody();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return "";
     }
 }
