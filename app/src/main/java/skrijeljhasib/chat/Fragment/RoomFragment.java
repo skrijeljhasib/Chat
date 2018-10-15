@@ -30,7 +30,7 @@ import skrijeljhasib.chat.Helper.JsonObjectConverter;
 import skrijeljhasib.chat.R;
 
 public class RoomFragment extends Fragment {
-    private Room room;
+    private Room room = new Room();
     private RecyclerView roomMessagesView;
     private ImageButton sendMessageButton;
     private TextInputEditText messageText;
@@ -44,9 +44,11 @@ public class RoomFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        chatApplication = (ChatApplication) getActivity().getApplication();
         roomMessagesViewAdapter = new MessageAdapter(context, messages);
-        username = "Hasib";
-        messageClient = new MessageClient(Constants.CHAT_SERVER_API_URL, "");
+        messageClient = chatApplication.getMessageClient();
+
+        username = chatApplication.getUsername();
     }
 
     @Nullable
@@ -65,9 +67,9 @@ public class RoomFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // To be removed
-        room = new Room();
-        room.setId(1);
+        Bundle bundle = getArguments();
+
+        room.setId(bundle.getInt("roomId"));
 
         roomMessagesView = view.findViewById(R.id.room_messages);
         sendMessageButton = view.findViewById(R.id.send_message_button);
@@ -86,8 +88,6 @@ public class RoomFragment extends Fragment {
     }
 
     public void socketListener() {
-        chatApplication = (ChatApplication) getActivity().getApplication();
-
         socket = chatApplication.getSocket();
 
         socket.on(Socket.EVENT_CONNECT, onSocketConnectListener);
@@ -144,7 +144,8 @@ public class RoomFragment extends Fragment {
                         message.setUsername(username);
                         message.setBody(messageText.getText().toString());
                         message.setRoom(room);
-                        messageClient.addMessageToRoom(message);
+                        String result = messageClient.addMessageToRoom(message);
+                        System.out.println(result);
                         messageText.setText("");
                     }
                 }

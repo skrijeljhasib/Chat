@@ -40,7 +40,10 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         RoomFragment roomFragment = new RoomFragment();
-        //roomFragment.setArguments();
+        Bundle bundle = new Bundle();
+        bundle.putInt("roomId", item.getItemId());
+        roomFragment.setArguments(bundle);
+
         getActivity().getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_frame_main, roomFragment)
                 .addToBackStack(null)

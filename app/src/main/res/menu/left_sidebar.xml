@@ -4,5 +4,10 @@
         android:id="@+id/rooms_joined_list"
         android:checkableBehavior="none">
 
+        <item
+            android:id="@+id/room1"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:title="Test Room" />
     </group>
 </menu>

@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.Map;
 
 import skrijeljhasib.chat.Client.Runnable.HttpRequest;
+import skrijeljhasib.chat.Helper.ParameterStringBuilder;
 
 abstract class ApiClient {
     private HttpURLConnection con;
@@ -26,12 +27,8 @@ abstract class ApiClient {
         try {
             con.setRequestMethod("POST");
 
-            DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-            wr.writeBytes(json);
-            wr.flush();
-            wr.close();
+            HttpRequest post = new HttpRequest(con, json);
 
-            HttpRequest post = new HttpRequest(con);
             Thread thread = new Thread(post);
             thread.start();
             thread.join();
@@ -41,20 +38,16 @@ abstract class ApiClient {
         }
 
         return "";
-
     }
 
     String get(Map<String, String> parameters) {
         try {
             con.setRequestMethod("GET");
 
-            /*String parameterString = ParameterStringBuilder.getParamsString(parameters);
-            DataOutputStream out = new DataOutputStream(con.getOutputStream());
-            out.writeBytes(parameterString);
-            out.flush();
-            out.close();*/
+            String parameterString = ParameterStringBuilder.getParamsString(parameters);
 
-            HttpRequest get = new HttpRequest(con);
+            HttpRequest get = new HttpRequest(con, parameterString);
+
             Thread thread = new Thread(get);
             thread.start();
             thread.join();
