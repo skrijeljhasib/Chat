@@ -9,20 +9,24 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import skrijeljhasib.chat.Entity.Room;
 import skrijeljhasib.chat.R;
 
 public class RoomsAdapter extends ArrayAdapter<Room> {
-    public RoomsAdapter(Context context, List<Room> rooms) {
-        super(context, 0, rooms);
+
+    ArrayList rooms;
+
+    public RoomsAdapter(Context context, ArrayList<Room> r) {
+        super(context, 0, r);
+        rooms = r;
     }
 
     @NonNull
     @Override
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
-        Room room = getItem(position);
+        final Room room = getItem(position);
 
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_room, parent, false);
@@ -32,6 +36,15 @@ public class RoomsAdapter extends ArrayAdapter<Room> {
         ImageButton roomJoinButton = convertView.findViewById(R.id.room_join_button);
 
         roomName.setText(room.getName());
+
+        roomJoinButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                rooms.remove(room);
+
+                notifyDataSetChanged();
+            }
+        });
 
         return convertView;
     }

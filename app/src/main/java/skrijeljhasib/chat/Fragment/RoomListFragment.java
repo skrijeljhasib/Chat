@@ -114,4 +114,5 @@ public class RoomListFragment extends Fragment {
             roomListFound.setAdapter(roomsAdapter);
         }
     }
+
 }
