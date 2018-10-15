@@ -51,6 +51,7 @@ public class ConnectActivity extends AppCompatActivity {
                 chatApplication.setSocket(IO.socket(socketAddress, opts));
                 chatApplication.setMessageClient(new MessageClient(apiAddress, token));
                 chatApplication.setRoomClient(new RoomClient(apiAddress, token));
+                chatApplication.setUsername(username);
 
                 Intent intent = new Intent(ConnectActivity.this, MainActivity.class);
                 startActivity(intent);

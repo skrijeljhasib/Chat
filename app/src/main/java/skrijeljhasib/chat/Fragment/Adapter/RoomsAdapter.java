@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.List;
@@ -28,10 +29,9 @@ public class RoomsAdapter extends ArrayAdapter<Room> {
         }
 
         TextView roomName = convertView.findViewById(R.id.room_name);
-        //TextView roomCreatedAtDate = convertView.findViewById(R.id.room_createdAt_date);
+        ImageButton roomJoinButton = convertView.findViewById(R.id.room_join_button);
 
         roomName.setText(room.getName());
-        //roomCreatedAtDate.setText(room.getCreatedAt().toString());
 
         return convertView;
     }

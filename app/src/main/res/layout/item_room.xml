@@ -8,17 +8,22 @@
         android:id="@+id/room_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
         android:textColor="?android:textColorPrimary"
         android:textSize="18sp" />
 
-    <!-- <TextView
-        android:id="@+id/room_createdAt_date"
-        android:layout_width="wrap_content"
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <ImageButton
+        android:id="@+id/room_join_button"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
-        android:text="Created at" />
-
-        -->
-
-    <!-- Add join room button-->
+        android:layout_gravity="right"
+        android:background="@null"
+        android:contentDescription="Join room"
+        android:src="@drawable/ic_add_circle_outline_black_24dp" />
 
 </LinearLayout>
