@@ -1,10 +1,6 @@
 package skrijeljhasib.chat.Client;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import skrijeljhasib.chat.Entity.Message;
-import skrijeljhasib.chat.Helper.JsonObjectConverter;
 
 public class MessageClient extends ApiClient {
     public MessageClient(String url, String authorization) {
@@ -12,9 +8,11 @@ public class MessageClient extends ApiClient {
     }
 
     public String addMessageToRoom(Message message) {
-        Map<String, Object> parameters = new HashMap<>();
-        parameters.put("message", message);
+        String json = "message={" +
+                "\"room_id\":\"" + message.getRoom().getId() + "\"," +
+                "\"body\":\"" + message.getBody() + "\"," +
+                "\"user_name\":\"" + message.getUsername() + "\"}";
 
-        return post(JsonObjectConverter.objectToJson(parameters));
+        return post(json);
     }
 }

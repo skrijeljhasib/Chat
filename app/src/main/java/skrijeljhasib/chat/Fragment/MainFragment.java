@@ -41,7 +41,9 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         RoomFragment roomFragment = new RoomFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt("roomId", item.getItemId());
+        //bundle.putInt("roomId", item.getItemId());
+        // For testing purposes in my local machine
+        bundle.putInt("roomId", 8);
         roomFragment.setArguments(bundle);
 
         getActivity().getSupportFragmentManager().beginTransaction()

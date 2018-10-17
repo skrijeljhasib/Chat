@@ -2,6 +2,7 @@ package skrijeljhasib.chat.Client.Runnable;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 
@@ -33,6 +34,10 @@ public class HttpRequest implements Runnable {
 
             httpURLConnection.connect();
 
+            System.out.println(body);
+            System.out.println(httpURLConnection.getResponseCode());
+            System.out.println(httpURLConnection.getResponseMessage());
+
             BufferedReader in = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
 
             String inputLine;
@@ -40,7 +45,7 @@ public class HttpRequest implements Runnable {
                 responseBody.append(inputLine);
             }
             in.close();
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.err.println(e.getMessage());
         }
     }

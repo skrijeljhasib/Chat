@@ -147,6 +147,8 @@ public class RoomFragment extends Fragment {
                         String result = messageClient.addMessageToRoom(message);
                         System.out.println(result);
                         messageText.setText("");
+
+                        System.out.println("Message send");
                     }
                 }
             });
