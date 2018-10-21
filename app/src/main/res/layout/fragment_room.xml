@@ -46,7 +46,7 @@
             android:layout_height="match_parent"
             android:contentDescription="Send message to room"
             android:background="@null"
-            android:src="@drawable/ic_send_black_24dp" />
+            android:src="@drawable/ic_send_24dp" />
     </LinearLayout>
 
 </LinearLayout>

@@ -18,7 +18,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
 import skrijeljhasib.chat.ChatApplication;
 import skrijeljhasib.chat.Entity.Room;
 import skrijeljhasib.chat.Helper.JsonObjectConverter;
@@ -28,6 +27,7 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
 
     ChatApplication chatApplication;
     DrawerLayout drawerLayout;
+    NavigationView navigationView;
 
     @Override
     public void onAttach(Context context) {
@@ -39,7 +39,7 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         drawerLayout = getActivity().findViewById(R.id.main_layout);
-        NavigationView navigationView = getActivity().findViewById(R.id.nav_view);
+        navigationView = getActivity().findViewById(R.id.nav_view);
         navigationView.bringToFront();
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -97,7 +97,9 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
                 .addToBackStack(null)
                 .commit();
 
-        //item.setChecked(true);
+        unCheckMenuItems();
+        item.setChecked(true);
+
         drawerLayout.closeDrawers();
 
         return true;
@@ -107,14 +109,20 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
         @Override
         public void onClick(View view) {
             RoomListFragment roomListFragment = new RoomListFragment();
-            //roomListFragment.setArguments();
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.content_frame_main, roomListFragment)
                     .addToBackStack(null)
                     .commit();
 
-            //item.setChecked(true);
+            unCheckMenuItems();
+
             drawerLayout.closeDrawers();
         }
     };
+
+    void unCheckMenuItems() {
+        for (int i = 0; i < navigationView.getMenu().size(); i++) {
+            navigationView.getMenu().getItem(i).setChecked(false);
+        }
+    }
 }

@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:theme="@style/Theme.AppCompat"
+    android:background="#FFFFFF">
 
     <group
         android:id="@+id/right_menu"
         android:checkableBehavior="single"
-        android:icon="@drawable/ic_more_vert_black_24dp"
-        app:showAsAction="always" >
+        android:icon="@drawable/ic_more_vert_24dp"
+        app:showAsAction="always">
 
         <item
             android:id="@+id/about"

@@ -2,8 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group
         android:id="@+id/rooms_joined_list"
-        android:checkableBehavior="none">
-
+        android:checkableBehavior="single">
 
     </group>
 </menu>

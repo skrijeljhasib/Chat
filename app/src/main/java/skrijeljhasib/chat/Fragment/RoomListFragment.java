@@ -102,7 +102,6 @@ public class RoomListFragment extends Fragment {
                 json.remove("messages");
                 json.remove("created_at");
                 String roomJson = json.toString();
-                System.out.println(roomJson);
                 roomsArray.add((Room) JsonObjectConverter.jsonToObject(roomJson, Room.class));
             }
 
