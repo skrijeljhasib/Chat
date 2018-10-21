@@ -11,16 +11,19 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import skrijeljhasib.chat.ChatApplication;
 import skrijeljhasib.chat.Entity.Room;
 import skrijeljhasib.chat.R;
 
 public class RoomsAdapter extends ArrayAdapter<Room> {
 
-    ArrayList rooms;
+    private ArrayList roomList;
+    private ChatApplication chatApplication;
 
-    public RoomsAdapter(Context context, ArrayList<Room> r) {
+    public RoomsAdapter(Context context, ArrayList<Room> r, ChatApplication cA) {
         super(context, 0, r);
-        rooms = r;
+        roomList = r;
+        chatApplication = cA;
     }
 
     @NonNull
@@ -40,8 +43,8 @@ public class RoomsAdapter extends ArrayAdapter<Room> {
         roomJoinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rooms.remove(room);
-
+                chatApplication.getRoomClient().joinRoom(chatApplication.getUsername(), room);
+                roomList.remove(room);
                 notifyDataSetChanged();
             }
         });

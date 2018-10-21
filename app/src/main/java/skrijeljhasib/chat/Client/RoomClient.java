@@ -1,31 +1,22 @@
 package skrijeljhasib.chat.Client;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import skrijeljhasib.chat.Entity.Room;
-import skrijeljhasib.chat.Helper.JsonObjectConverter;
 
 public class RoomClient extends ApiClient {
     public RoomClient(String url, String authorization) {
         super(url + "/api/rooms", authorization);
     }
 
-    public String createRoom(Room room) {
-        Map<String, Object> parameters = new HashMap<>();
-        parameters.put("room", room);
+    public String joinRoom(String username, Room room) {
 
-        return post(JsonObjectConverter.objectToJson(parameters));
-    }
+        String urlParams = "/" + room.getId() + "/join" ;
 
-    public String fetchRoom(String id) {
-        Map<String, String> parameters = new HashMap<>();
-        parameters.put("id", id);
-        return this.get(parameters);
+        String jsonBody = "username=" + username;
+
+        return post(urlParams, jsonBody);
     }
 
     public String fetchRooms() {
-        Map<String, String> parameters = new HashMap<>();
-        return this.get(parameters);
+        return this.get("");
     }
 }

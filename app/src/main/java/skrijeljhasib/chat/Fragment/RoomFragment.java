@@ -22,7 +22,6 @@ import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 import skrijeljhasib.chat.ChatApplication;
 import skrijeljhasib.chat.Client.MessageClient;
-import skrijeljhasib.chat.Constants.Constants;
 import skrijeljhasib.chat.Entity.Message;
 import skrijeljhasib.chat.Entity.Room;
 import skrijeljhasib.chat.Fragment.Adapter.MessageAdapter;
@@ -32,7 +31,6 @@ import skrijeljhasib.chat.R;
 public class RoomFragment extends Fragment {
     private Room room = new Room();
     private RecyclerView roomMessagesView;
-    private ImageButton sendMessageButton;
     private TextInputEditText messageText;
     private ChatApplication chatApplication;
     private Socket socket;
@@ -72,7 +70,7 @@ public class RoomFragment extends Fragment {
         room.setId(bundle.getInt("roomId"));
 
         roomMessagesView = view.findViewById(R.id.room_messages);
-        sendMessageButton = view.findViewById(R.id.send_message_button);
+        ImageButton sendMessageButton = view.findViewById(R.id.send_message_button);
         messageText = view.findViewById(R.id.message_input);
 
         sendMessageButton.setOnClickListener(buttonListener);

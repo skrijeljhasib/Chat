@@ -1,14 +1,11 @@
 package skrijeljhasib.chat.Client;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
-import java.util.Map;
 
 import skrijeljhasib.chat.Client.Runnable.HttpRequest;
-import skrijeljhasib.chat.Helper.ParameterStringBuilder;
 
 abstract class ApiClient {
     private String url;
@@ -19,10 +16,10 @@ abstract class ApiClient {
        authorization = a;
     }
 
-    private HttpURLConnection prepareConnection() {
+    private HttpURLConnection prepareConnection(String urlParams) {
         HttpURLConnection con = null;
         try {
-            con = (HttpURLConnection) new URL(url).openConnection();
+            con = (HttpURLConnection) new URL(url + urlParams).openConnection();
             con.setRequestProperty("Authorization", authorization);
             con.setConnectTimeout(10000);
             con.setReadTimeout(10000);
@@ -33,14 +30,14 @@ abstract class ApiClient {
         return con;
     }
 
-    String post(String json) {
+    String post(String urlParams, String body) {
         try {
-            HttpURLConnection con = prepareConnection();
+            HttpURLConnection con = prepareConnection(urlParams);
 
             con.setRequestMethod("POST");
             con.setDoOutput(true);
 
-            HttpRequest post = new HttpRequest(con, json);
+            HttpRequest post = new HttpRequest(con, body);
 
             Thread thread = new Thread(post);
             thread.start();
@@ -54,22 +51,20 @@ abstract class ApiClient {
         return "";
     }
 
-    String get(Map<String, String> parameters) {
+    String get(String urlParams) {
         try {
-            HttpURLConnection con = prepareConnection();
+            HttpURLConnection con = prepareConnection(urlParams);
 
             con.setRequestMethod("GET");
 
-            String parameterString = ParameterStringBuilder.getParamsString(parameters);
-
-            HttpRequest get = new HttpRequest(con, parameterString);
+            HttpRequest get = new HttpRequest(con, "");
 
             Thread thread = new Thread(get);
             thread.start();
             thread.join();
             con.disconnect();
             return get.getResponseBody();
-        }  catch (ProtocolException | InterruptedException | UnsupportedEncodingException e) {
+        }  catch (ProtocolException | InterruptedException e) {
             System.err.println(e.getMessage());
         }
 

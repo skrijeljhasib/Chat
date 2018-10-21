@@ -8,11 +8,11 @@ public class MessageClient extends ApiClient {
     }
 
     public String addMessageToRoom(Message message) {
-        String json = "message={" +
+        String jsonBody = "message={" +
                 "\"room_id\":\"" + message.getRoom().getId() + "\"," +
                 "\"body\":\"" + message.getBody() + "\"," +
                 "\"user_name\":\"" + message.getUsername() + "\"}";
 
-        return post(json);
+        return post("", jsonBody);
     }
 }

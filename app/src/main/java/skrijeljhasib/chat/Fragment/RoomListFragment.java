@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 import skrijeljhasib.chat.ChatApplication;
-import skrijeljhasib.chat.Client.RoomClient;
 import skrijeljhasib.chat.Entity.Room;
 import skrijeljhasib.chat.Fragment.Adapter.RoomsAdapter;
 import skrijeljhasib.chat.Helper.JsonObjectConverter;
@@ -26,12 +25,12 @@ import skrijeljhasib.chat.R;
 
 public class RoomListFragment extends Fragment {
 
-    public RoomClient roomClient;
+    public ChatApplication chatApplication;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        roomClient = ((ChatApplication) getActivity().getApplication()).getRoomClient();
+        chatApplication = (ChatApplication) getActivity().getApplication();
     }
 
     @Nullable
@@ -88,7 +87,7 @@ public class RoomListFragment extends Fragment {
     };
 
     public void fetchRooms (View view) throws JSONException {
-        String data = roomClient.fetchRooms();
+        String data = chatApplication.getRoomClient().fetchRooms();
 
         if (!data.isEmpty()) {
 
@@ -107,7 +106,7 @@ public class RoomListFragment extends Fragment {
                 roomsArray.add((Room) JsonObjectConverter.jsonToObject(roomJson, Room.class));
             }
 
-            RoomsAdapter roomsAdapter = new RoomsAdapter(getActivity(), roomsArray);
+            RoomsAdapter roomsAdapter = new RoomsAdapter(getActivity(), roomsArray, chatApplication);
 
             ListView roomListFound = view.findViewById(R.id.rooms_found_list);
 
