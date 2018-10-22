@@ -35,9 +35,9 @@ public class ConnectActivity extends AppCompatActivity {
         String token = tokenInput.getText().toString();
 
         if (socketAddress.isEmpty()) {
-            socketInput.setError("Please enter a socket address");
+            socketInput.setError("Please enter a valid socket address");
         } else if (apiAddress.isEmpty()) {
-            apiInput.setError("Please enter a API address");
+            apiInput.setError("Please enter a valid api address");
         } else if (username.isEmpty()) {
             usernameInput.setError("Please enter an username");
         } else {
@@ -57,7 +57,7 @@ public class ConnectActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             } catch (Throwable e) {
-                socketInput.setError("Check you addresses");
+                socketInput.setError("Check your addresses");
             }
         }
     }

@@ -25,7 +25,7 @@
             android:layout_margin="10dp"
             android:gravity="center_horizontal"
             android:paddingBottom="50dp"
-            android:text="Chat API - Connect"
+            android:text="Chat - Connect"
             android:textSize="24sp" />
 
         <LinearLayout
@@ -170,12 +170,11 @@
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginTop="50dp"
                 android:background="@drawable/connect_button"
-                android:textColor="#FFFFFF"
-                android:layout_marginTop="10dp"
-                android:layout_weight="0"
                 android:onClick="connect"
-                android:text="Connect" />
+                android:text="Connect"
+                android:textColor="#FFFFFF" />
         </LinearLayout>
 
     </LinearLayout>
