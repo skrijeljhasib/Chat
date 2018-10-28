@@ -110,21 +110,25 @@ public class RoomFragment extends Fragment {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    JSONObject data = (JSONObject) args[0];
-
-                    Message message;
 
                     try {
-                        message = (Message) JsonObjectConverter.jsonToObject(data.get("message").toString(), Message.class);
+                        JSONObject data = (JSONObject) args[0];
+
+                        JSONObject messageJson =  (JSONObject) data.get("message");
+                        int roomId = (int) messageJson.get("room_id");
+
+                        Message message = (Message) JsonObjectConverter.jsonToObject(messageJson.toString(), Message.class);
+
+                        if (room.getId() == roomId) {
+                            messages.add(message);
+                            roomMessagesViewAdapter.notifyItemInserted(messages.size() - 1);
+                            scrollToBottom();
+
+                            System.out.println("Message received");
+                        }
                     } catch (JSONException e) {
-                        throw new RuntimeException(e);
+                        e.printStackTrace();
                     }
-
-                    messages.add(message);
-                    roomMessagesViewAdapter.notifyItemInserted(messages.size() - 1);
-                    scrollToBottom();
-
-                    System.out.println("Message received");
                 }
             });
         }
