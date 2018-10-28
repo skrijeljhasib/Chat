@@ -35,9 +35,15 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
         chatApplication = (ChatApplication) getActivity().getApplication();
     }
 
+    @Nullable
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_main, container, false);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         drawerLayout = getActivity().findViewById(R.id.main_layout);
         navigationView = getActivity().findViewById(R.id.nav_view);
         navigationView.bringToFront();
@@ -77,12 +83,6 @@ public class MainFragment extends Fragment implements NavigationView.OnNavigatio
                 menu.add(1, room.getId(), i, room.getName());
             }
         }
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_main, container, false);
     }
 
     @Override
