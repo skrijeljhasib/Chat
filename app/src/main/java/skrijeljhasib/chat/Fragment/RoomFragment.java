@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -71,10 +72,13 @@ public class RoomFragment extends Fragment {
         Bundle bundle = getArguments();
 
         room.setId(bundle.getInt("roomId"));
+        room.setName("Room name");
 
         roomMessagesView = view.findViewById(R.id.room_messages);
         ImageButton sendMessageButton = view.findViewById(R.id.send_message_button);
         messageText = view.findViewById(R.id.message_input);
+        TextView roomNameTextView = view.findViewById(R.id.room_name);
+        roomNameTextView.setText(room.getName());
 
         sendMessageButton.setOnClickListener(buttonListener);
 

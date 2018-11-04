@@ -8,13 +8,24 @@
     android:orientation="vertical"
     tools:context=".Fragment.RoomFragment">
 
+    <TextView
+        android:id="@+id/room_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:background="@drawable/textlines"
+        android:paddingLeft="15dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/room_messages"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:scrollbars="horizontal"
-        android:layout_marginTop="?attr/actionBarSize" >
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:scrollbars="horizontal">
 
     </android.support.v7.widget.RecyclerView>
 
@@ -22,10 +33,10 @@
         android:id="@+id/room_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="8dp"
+        android:background="@drawable/textlines"
+        android:orientation="horizontal"
         android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:orientation="horizontal">
+        android:paddingRight="8dp">
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/text_layout"
@@ -44,8 +55,8 @@
             android:id="@+id/send_message_button"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:contentDescription="Send message to room"
             android:background="@null"
+            android:contentDescription="Send message to room"
             android:src="@drawable/ic_send_24dp" />
     </LinearLayout>
 
