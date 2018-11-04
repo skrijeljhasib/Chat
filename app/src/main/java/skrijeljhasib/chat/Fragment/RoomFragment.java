@@ -22,6 +22,7 @@ import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 import skrijeljhasib.chat.ChatApplication;
 import skrijeljhasib.chat.Client.MessageClient;
+import skrijeljhasib.chat.Db.MessageProvider;
 import skrijeljhasib.chat.Entity.Message;
 import skrijeljhasib.chat.Entity.Room;
 import skrijeljhasib.chat.Fragment.Adapter.MessageAdapter;
@@ -29,6 +30,7 @@ import skrijeljhasib.chat.Helper.JsonObjectConverter;
 import skrijeljhasib.chat.R;
 
 public class RoomFragment extends Fragment {
+
     private Room room = new Room();
     private RecyclerView roomMessagesView;
     private TextInputEditText messageText;
@@ -38,14 +40,15 @@ public class RoomFragment extends Fragment {
     private List<Message> messages = new ArrayList<>();
     private String username;
     private MessageClient messageClient;
+    private MessageProvider messageProvider;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         chatApplication = (ChatApplication) getActivity().getApplication();
+        messageProvider = chatApplication.getMessageProvider();
         roomMessagesViewAdapter = new MessageAdapter(context, messages);
         messageClient = chatApplication.getMessageClient();
-
         username = chatApplication.getUsername();
     }
 
@@ -77,6 +80,11 @@ public class RoomFragment extends Fragment {
 
         roomMessagesView.setLayoutManager(new LinearLayoutManager(getActivity()));
         roomMessagesView.setAdapter(roomMessagesViewAdapter);
+
+        messages.clear();
+        messages.addAll(messageProvider.getMessagesFromRoom(room.getId()));
+
+        scrollToBottom();
     }
 
     @Override
@@ -114,17 +122,17 @@ public class RoomFragment extends Fragment {
                     try {
                         JSONObject data = (JSONObject) args[0];
 
-                        JSONObject messageJson =  (JSONObject) data.get("message");
+                        JSONObject messageJson = (JSONObject) data.get("message");
                         int roomId = (int) messageJson.get("room_id");
 
                         Message message = (Message) JsonObjectConverter.jsonToObject(messageJson.toString(), Message.class);
 
                         if (room.getId() == roomId) {
+                            message.setRoom(room);
                             messages.add(message);
                             roomMessagesViewAdapter.notifyItemInserted(messages.size() - 1);
+                            messageProvider.createMessage(message);
                             scrollToBottom();
-
-                            System.out.println("Message received");
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -146,11 +154,8 @@ public class RoomFragment extends Fragment {
                         message.setUsername(username);
                         message.setBody(messageText.getText().toString());
                         message.setRoom(room);
-                        String result = messageClient.addMessageToRoom(message);
-                        System.out.println(result);
+                        messageClient.addMessageToRoom(message);
                         messageText.setText("");
-
-                        System.out.println("Message send");
                     }
                 }
             });

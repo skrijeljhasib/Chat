@@ -12,6 +12,7 @@ import io.socket.engineio.client.transports.WebSocket;
 import skrijeljhasib.chat.ChatApplication;
 import skrijeljhasib.chat.Client.MessageClient;
 import skrijeljhasib.chat.Client.RoomClient;
+import skrijeljhasib.chat.Db.MessageProvider;
 import skrijeljhasib.chat.R;
 
 public class ConnectActivity extends AppCompatActivity {
@@ -52,6 +53,7 @@ public class ConnectActivity extends AppCompatActivity {
                 chatApplication.setMessageClient(new MessageClient(apiAddress, token));
                 chatApplication.setRoomClient(new RoomClient(apiAddress, token));
                 chatApplication.setUsername(username);
+                chatApplication.setMessageProvider(new MessageProvider(this));
 
                 Intent intent = new Intent(ConnectActivity.this, MainActivity.class);
                 startActivity(intent);

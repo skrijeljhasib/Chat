@@ -34,10 +34,6 @@ public class HttpRequest implements Runnable {
 
             httpURLConnection.connect();
 
-            System.out.println(body);
-            System.out.println(httpURLConnection.getResponseCode());
-            System.out.println(httpURLConnection.getResponseMessage());
-
             BufferedReader in = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
 
             String inputLine;

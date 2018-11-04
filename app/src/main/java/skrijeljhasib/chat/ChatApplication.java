@@ -5,6 +5,7 @@ import android.app.Application;
 import io.socket.client.Socket;
 import skrijeljhasib.chat.Client.MessageClient;
 import skrijeljhasib.chat.Client.RoomClient;
+import skrijeljhasib.chat.Db.MessageProvider;
 
 public class ChatApplication extends Application {
 
@@ -12,6 +13,7 @@ public class ChatApplication extends Application {
     private MessageClient messageClient;
     private RoomClient roomClient;
     private String username;
+    private MessageProvider messageProvider;
 
     public Socket getSocket() {
         return socket;
@@ -43,5 +45,13 @@ public class ChatApplication extends Application {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public MessageProvider getMessageProvider() {
+        return messageProvider;
+    }
+
+    public void setMessageProvider(MessageProvider messageProvider) {
+        this.messageProvider = messageProvider;
     }
 }
