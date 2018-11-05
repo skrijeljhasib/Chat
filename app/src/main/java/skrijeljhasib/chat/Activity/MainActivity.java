@@ -1,6 +1,8 @@
 package skrijeljhasib.chat.Activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -73,6 +75,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.disconnect:
                 ChatApplication chatApplication = (ChatApplication) getApplication();
                 chatApplication.getSocket().disconnect();
+                SharedPreferences sharedPref = getSharedPreferences("chat-connect", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.clear();
+                editor.commit();
                 startActivity(new Intent(MainActivity.this, ConnectActivity.class));
                 finish();
                 return true;
