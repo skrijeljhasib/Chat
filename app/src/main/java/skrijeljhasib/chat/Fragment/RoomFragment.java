@@ -23,6 +23,7 @@ import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 import skrijeljhasib.chat.ChatApplication;
 import skrijeljhasib.chat.Client.MessageClient;
+import skrijeljhasib.chat.Client.RoomClient;
 import skrijeljhasib.chat.Db.MessageProvider;
 import skrijeljhasib.chat.Entity.Message;
 import skrijeljhasib.chat.Entity.Room;
@@ -41,6 +42,7 @@ public class RoomFragment extends Fragment {
     private List<Message> messages = new ArrayList<>();
     private String username;
     private MessageClient messageClient;
+    private RoomClient roomClient;
     private MessageProvider messageProvider;
 
     @Override
@@ -50,6 +52,7 @@ public class RoomFragment extends Fragment {
         messageProvider = chatApplication.getMessageProvider();
         roomMessagesViewAdapter = new MessageAdapter(context, messages);
         messageClient = chatApplication.getMessageClient();
+        roomClient = chatApplication.getRoomClient();
         username = chatApplication.getUsername();
     }
 
@@ -70,9 +73,12 @@ public class RoomFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         Bundle bundle = getArguments();
+        int roomId = bundle.getInt("roomId");
 
-        room.setId(bundle.getInt("roomId"));
-        room.setName("Room name");
+        Room room = roomClient.fetchRoom(String.valueOf(roomId));
+
+        room.setId(roomId);
+        room.setName(room.getName());
 
         roomMessagesView = view.findViewById(R.id.room_messages);
         ImageButton sendMessageButton = view.findViewById(R.id.send_message_button);
