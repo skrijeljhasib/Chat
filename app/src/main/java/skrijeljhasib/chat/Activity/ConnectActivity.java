@@ -14,9 +14,12 @@ import java.net.URISyntaxException;
 import io.socket.client.IO;
 import io.socket.engineio.client.transports.WebSocket;
 import skrijeljhasib.chat.ChatApplication;
+import skrijeljhasib.chat.Client.ConfigClient;
 import skrijeljhasib.chat.Client.MessageClient;
 import skrijeljhasib.chat.Client.RoomClient;
 import skrijeljhasib.chat.Db.MessageProvider;
+import skrijeljhasib.chat.Entity.Config.Config;
+import skrijeljhasib.chat.Helper.JsonObjectConverter;
 import skrijeljhasib.chat.R;
 
 public class ConnectActivity extends AppCompatActivity {
@@ -48,24 +51,31 @@ public class ConnectActivity extends AppCompatActivity {
 
     public void connect(View view) {
 
-        TextInputEditText socketInput = findViewById(R.id.network_settings_socket);
         TextInputEditText apiInput = findViewById(R.id.network_settings_api);
         TextInputEditText tokenInput = findViewById(R.id.network_settings_token);
         TextInputEditText usernameInput = findViewById(R.id.user_preferences_username);
 
-        String socketAddress = socketInput.getText().toString();
         String apiAddress = apiInput.getText().toString();
         String username = usernameInput.getText().toString();
         String token = tokenInput.getText().toString();
 
-        if (socketAddress.isEmpty()) {
-            socketInput.setError("Please enter a valid socket address");
-        } else if (apiAddress.isEmpty()) {
-            apiInput.setError("Please enter a valid api address");
+        if (apiAddress.isEmpty()) {
+            apiInput.setError("Please enter your chat server address");
         } else if (username.isEmpty()) {
             usernameInput.setError("Please enter an username");
         } else {
             try {
+                ConfigClient configClient = new ConfigClient(apiAddress, token);
+                String data = configClient.fetchConfig();
+
+                if (data.equals("")) {
+                    throw new Exception("Wrong chat server");
+                }
+
+                Config config = (Config) JsonObjectConverter.jsonToObject(data, Config.class);
+
+                String socketAddress = config.getSocket().getUrl();
+
                 SharedPreferences sharedPref = getSharedPreferences("chat-connect", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putString("api-url", apiAddress);
@@ -74,8 +84,8 @@ public class ConnectActivity extends AppCompatActivity {
                 editor.putString("username", username);
                 editor.commit();
                 openMainActivity(apiAddress, socketAddress, token, username);
-            } catch (Throwable e) {
-                socketInput.setError("Check your addresses");
+            } catch (Exception e) {
+                apiInput.setError("Enter a valid chat server address");
             }
         }
     }
