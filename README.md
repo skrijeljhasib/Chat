@@ -4,7 +4,7 @@ Chat application for Android. Features include users having an account where he 
 Open git bash and run command "git clone https://github.com/skrijeljhasib/Chat.git"
 Once installed use IDE of choice to edit code
 
-## Changes to Code
+## Changing Code
 
 Feel free to make changes and/or additions to the code.
 Once changes/additions are done make pull request.
